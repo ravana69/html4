@@ -1,0 +1,920 @@
+<!DOCtype html>
+<html>
+<style>
+  @import url("https://fonts.googleapis.com/css2?family=Birthstone&display=swap");
+  *,
+  *::before,
+  *::after {
+    padding: 0;
+    margin: 0 auto;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: "Birthstone", cursive;
+    background-color: #111;
+    color: #aaa;
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+    perspective: 1500px;
+    overflow: hidden;
+    font-size: 32px;
+  }
+  
+  .text {
+    position: fixed;
+    left: 1em;
+    top: 1em;
+  }
+  
+  .scene {
+    transform: rotateX(-20deg);
+    transform-style: preserve-3d;
+  }
+  
+  .xylophone {
+    position: relative;
+    transform: rotateX(90deg) translateZ(0em);
+    transform-style: preserve-3d;
+  }
+  
+  .key {
+    position: absolute;
+    left: var(--left);
+    width: 1em;
+    height: var(--height);
+    background-color: #ddd;
+    transform-style: preserve-3d;
+    box-shadow: 0 0 0.5em #0007 inset;
+  }
+  
+  .key:nth-child(1) {
+    --left: -9.25em;
+    --height: 8em;
+  }
+  
+  .key:nth-child(2) {
+    --left: -8em;
+    --height: 7.68em;
+  }
+  
+  .key:nth-child(3) {
+    --left: -6.75em;
+    --height: 7.3728em;
+  }
+  
+  .key:nth-child(4) {
+    --left: -5.5em;
+    --height: 7.077888em;
+  }
+  
+  .key:nth-child(5) {
+    --left: -4.25em;
+    --height: 6.79477248em;
+  }
+  
+  .key:nth-child(6) {
+    --left: -3em;
+    --height: 6.5229815808em;
+  }
+  
+  .key:nth-child(7) {
+    --left: -1.75em;
+    --height: 6.2620623176em;
+  }
+  
+  .key:nth-child(8) {
+    --left: -0.5em;
+    --height: 6.0115798249em;
+  }
+  
+  .key:nth-child(9) {
+    --left: 0.75em;
+    --height: 5.7711166319em;
+  }
+  
+  .key:nth-child(10) {
+    --left: 2em;
+    --height: 5.5402719666em;
+  }
+  
+  .key:nth-child(11) {
+    --left: 3.25em;
+    --height: 5.3186610879em;
+  }
+  
+  .key:nth-child(12) {
+    --left: 4.5em;
+    --height: 5.1059146444em;
+  }
+  
+  .key:nth-child(13) {
+    --left: 5.75em;
+    --height: 4.9016780586em;
+  }
+  
+  .key:nth-child(14) {
+    --left: 7em;
+    --height: 4.7056109363em;
+  }
+  
+  .key:nth-child(15) {
+    --left: 8.25em;
+    --height: 4.5173864988em;
+  }
+  
+  .key::before {
+    content: "";
+    position: absolute;
+    width: 0.5em;
+    height: 100%;
+    background-color: #777;
+  }
+  
+  .key:nth-child(-n+7)::before {
+    transform: rotateY(-90deg);
+    right: 0;
+    transform-origin: right;
+  }
+  
+  .key:nth-child(n+8):nth-child(-n+15)::before {
+    transform: rotateY(90deg);
+    left: 0;
+    transform-origin: left;
+  }
+  
+  .key::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 100%;
+    width: 100%;
+    height: 0.5em;
+    background-color: #aaa;
+    transform: rotateX(-90deg);
+    transform-origin: top;
+    box-shadow: 0 0 0.5em #0007 inset;
+  }
+  
+  .key:nth-child(n+16) {
+    bottom: -1em;
+    transform: translateZ(0.75em);
+  }
+  
+  .key:nth-child(5n+16) {
+    --left: -8.625em;
+    --height: 6em;
+  }
+  
+  .key:nth-child(5n+17) {
+    --left: -7.375em;
+    --height: 5.76em;
+  }
+  
+  .key:nth-child(5n+18) {
+    --left: -4.875em;
+    --height: 5.5296em;
+  }
+  
+  .key:nth-child(5n+19) {
+    --left: -3.625em;
+    --height: 5.308416em;
+  }
+  
+  .key:nth-child(5n+20) {
+    --left: -2.375em;
+    --height: 5.09607936em;
+  }
+  
+  .key:nth-child(5n+21) {
+    --left: 0.125em;
+    --height: 4.8922361856em;
+  }
+  
+  .key:nth-child(5n+22) {
+    --left: 1.375em;
+    --height: 4.6965467382em;
+  }
+  
+  .key:nth-child(5n+23) {
+    --left: 3.875em;
+    --height: 4.5086848686em;
+  }
+  
+  .key:nth-child(5n+24) {
+    --left: 5.125em;
+    --height: 4.3283374739em;
+  }
+  
+  .key:nth-child(5n+25) {
+    --left: 6.375em;
+    --height: 4.1552039749em;
+  }
+  
+  .key:nth-child(5n+26) {
+    --left: 8.875em;
+    --height: 3.9889958159em;
+  }
+  
+  .key:nth-child(5n+27) {
+    --left: 10.125em;
+    --height: 3.8294359833em;
+  }
+  
+  .key:nth-child(5n+28) {
+    --left: 12.625em;
+    --height: 3.676258544em;
+  }
+  
+  .key:nth-child(5n+29) {
+    --left: 13.875em;
+    --height: 3.5292082022em;
+  }
+  
+  .key:nth-child(5n+30) {
+    --left: 15.125em;
+    --height: 3.3880398741em;
+  }
+  
+  .key:nth-child(5n+31) {
+    --left: 17.625em;
+    --height: 3.2525182792em;
+  }
+  
+  .key:nth-child(5n+32) {
+    --left: 18.875em;
+    --height: 3.122417548em;
+  }
+  
+  .key:nth-child(5n+33) {
+    --left: 21.375em;
+    --height: 2.9975208461em;
+  }
+  
+  .key:nth-child(5n+34) {
+    --left: 22.625em;
+    --height: 2.8776200122em;
+  }
+  
+  .key:nth-child(5n+35) {
+    --left: 23.875em;
+    --height: 2.7625152117em;
+  }
+  
+  .key:nth-child(n+16):nth-child(-n+21)::before {
+    transform: rotateY(-90deg);
+    right: 0;
+    transform-origin: right;
+  }
+  
+  .key:nth-child(n+22)::before {
+    transform: rotateY(90deg);
+    left: 0;
+    transform-origin: left;
+  }
+  
+  .keyShadow {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 1em;
+    background-color: #0003;
+    transform: translateZ(-0.75em);
+    filter: blur(0.125em);
+  }
+  
+  .balls,
+  .ballShadows {
+    transform-style: preserve-3d;
+  }
+  
+  .ball {
+    position: absolute;
+    left: var(--left);
+    bottom: 50vh;
+    width: 0.6em;
+    height: 0.6em;
+    background-image: radial-gradient(circle at 50% 20%, hsl(var(--hue), 100%, 75%), #000);
+    border-radius: 50%;
+    -webkit-animation: ballDrop 4s var(--delay, 0s) forwards, ballZ 4s var(--delay, 0s) ease-in-out forwards;
+    animation: ballDrop 4s var(--delay, 0s) forwards, ballZ 4s var(--delay, 0s) ease-in-out forwards;
+  }
+  
+  @-webkit-keyframes ballDrop {
+    0% {
+      bottom: 15em;
+      -webkit-animation-timing-function: ease-in;
+      animation-timing-function: ease-in;
+    }
+    40% {
+      bottom: var(--bottom);
+      -webkit-animation-timing-function: ease-out;
+      animation-timing-function: ease-out;
+    }
+    55% {
+      bottom: 5em;
+      -webkit-animation-timing-function: ease-in;
+      animation-timing-function: ease-in;
+    }
+    100% {
+      bottom: -30em;
+    }
+  }
+  
+  @keyframes ballDrop {
+    0% {
+      bottom: 15em;
+      -webkit-animation-timing-function: ease-in;
+      animation-timing-function: ease-in;
+    }
+    40% {
+      bottom: var(--bottom);
+      -webkit-animation-timing-function: ease-out;
+      animation-timing-function: ease-out;
+    }
+    55% {
+      bottom: 5em;
+      -webkit-animation-timing-function: ease-in;
+      animation-timing-function: ease-in;
+    }
+    100% {
+      bottom: -30em;
+    }
+  }
+  
+  @-webkit-keyframes ballZ {
+    0%,
+    40% {
+      transform: translateX(0.2em) translateZ(var(--tz)) rotateX(20deg);
+    }
+    100% {
+      transform: translateX(0.2em) translateZ(var(--tz)) rotateX(20deg) translateZ(50em);
+    }
+  }
+  
+  @keyframes ballZ {
+    0%,
+    40% {
+      transform: translateX(0.2em) translateZ(var(--tz)) rotateX(20deg);
+    }
+    100% {
+      transform: translateX(0.2em) translateZ(var(--tz)) rotateX(20deg) translateZ(50em);
+    }
+  }
+  
+  .ball:nth-child(1) {
+    --hue: 0;
+  }
+  
+  .ball:nth-child(2) {
+    --hue: 42;
+  }
+  
+  .ball:nth-child(3) {
+    --hue: 84;
+  }
+  
+  .ball:nth-child(4) {
+    --hue: 126;
+  }
+  
+  .ball:nth-child(5) {
+    --hue: 168;
+  }
+  
+  .ball:nth-child(6) {
+    --hue: 210;
+  }
+  
+  .ball:nth-child(7) {
+    --hue: 252;
+  }
+  
+  .ball:nth-child(8) {
+    --hue: 294;
+  }
+  
+  .ball:nth-child(9) {
+    --hue: 336;
+  }
+  
+  .ball:nth-child(10) {
+    --hue: 378;
+  }
+  
+  .ball:nth-child(11) {
+    --hue: 420;
+  }
+  
+  .ball:nth-child(12) {
+    --hue: 462;
+  }
+  
+  .ball:nth-child(13) {
+    --hue: 504;
+  }
+  
+  .ball:nth-child(14) {
+    --hue: 546;
+  }
+  
+  .ball:nth-child(15) {
+    --hue: 588;
+  }
+  
+  .ball:nth-child(16) {
+    --hue: 630;
+  }
+  
+  .ball:nth-child(17) {
+    --hue: 672;
+  }
+  
+  .ball:nth-child(18) {
+    --hue: 714;
+  }
+  
+  .ball:nth-child(19) {
+    --hue: 756;
+  }
+  
+  .ball:nth-child(20) {
+    --hue: 798;
+  }
+  
+  .ball:nth-child(21) {
+    --hue: 840;
+  }
+  
+  .ball:nth-child(22) {
+    --hue: 882;
+  }
+  
+  .ball:nth-child(23) {
+    --hue: 924;
+  }
+  
+  .ball:nth-child(24) {
+    --hue: 966;
+  }
+  
+  .ball:nth-child(25) {
+    --hue: 1008;
+  }
+  
+  .ball:nth-child(26) {
+    --hue: 1050;
+  }
+  
+  .ball:nth-child(27) {
+    --hue: 1092;
+  }
+  
+  .ball:nth-child(28) {
+    --hue: 1134;
+  }
+  
+  .ball:nth-child(29) {
+    --hue: 1176;
+  }
+  
+  .ball:nth-child(30) {
+    --hue: 1218;
+  }
+  
+  .ball:nth-child(31) {
+    --hue: 1260;
+  }
+  
+  .ball:nth-child(32) {
+    --hue: 1302;
+  }
+  
+  .ball:nth-child(33) {
+    --hue: 1344;
+  }
+  
+  .ball:nth-child(34) {
+    --hue: 1386;
+  }
+  
+  .ball:nth-child(35) {
+    --hue: 1428;
+  }
+  
+  .ballShadow {
+    position: absolute;
+    left: var(--left, 0);
+    bottom: var(--bottom);
+    width: 1em;
+    height: 1em;
+    background-color: #000;
+    border-radius: 50%;
+    transform: translateZ(var(--tz)) rotateX(90deg) translateZ(-0.5em) scale(0.5);
+    filter: blur(0.5em);
+    opacity: 0;
+    -webkit-animation: shadow 4s var(--delay, 0s) forwards;
+    animation: shadow 4s var(--delay, 0s) forwards;
+  }
+  
+  @-webkit-keyframes shadow {
+    0%,
+    35%,
+    55%,
+    100% {
+      opacity: 0;
+      -webkit-animation-timing-function: ease-in;
+      animation-timing-function: ease-in;
+    }
+    40% {
+      opacity: 1;
+      -webkit-animation-timing-function: ease-out;
+      animation-timing-function: ease-out;
+    }
+  }
+  
+  @keyframes shadow {
+    0%,
+    35%,
+    55%,
+    100% {
+      opacity: 0;
+      -webkit-animation-timing-function: ease-in;
+      animation-timing-function: ease-in;
+    }
+    40% {
+      opacity: 1;
+      -webkit-animation-timing-function: ease-out;
+      animation-timing-function: ease-out;
+    }
+  }
+  
+  .ball,
+  .ballShadow {
+    --bottom: 0;
+    --tz: 2em;
+  }
+  
+  .ball:nth-child(2),
+  .ball:nth-child(4),
+  .ball:nth-child(15),
+  .ball:nth-child(20),
+  .ball:nth-child(22),
+  .ballShadow:nth-child(2),
+  .ballShadow:nth-child(4),
+  .ballShadow:nth-child(15),
+  .ballShadow:nth-child(20),
+  .ballShadow:nth-child(22) {
+    --bottom: 0.75em;
+    --tz: -0.5em;
+  }
+  
+  .ball:nth-child(1),
+  .ballShadow:nth-child(1) {
+    --left: 2em;
+    --delay: 0.66s;
+  }
+  
+  .ball:nth-child(2),
+  .ballShadow:nth-child(2) {
+    --left: 1.375em;
+    --delay: 1.01s;
+  }
+  
+  .ball:nth-child(3),
+  .ballShadow:nth-child(3) {
+    --left: 2em;
+    --delay: 1.3s;
+  }
+  
+  .ball:nth-child(4),
+  .ballShadow:nth-child(4) {
+    --left: 1.375em;
+    --delay: 1.61s;
+  }
+  
+  .ball:nth-child(5),
+  .ballShadow:nth-child(5) {
+    --left: 2em;
+    --delay: 1.905s;
+  }
+  
+  .ball:nth-child(6),
+  .ballShadow:nth-child(6) {
+    --left: -1.75em;
+    --delay: 2.145s;
+  }
+  
+  .ball:nth-child(7),
+  .ballShadow:nth-child(7) {
+    --left: 0.75em;
+    --delay: 2.416s;
+  }
+  
+  .ball:nth-child(8),
+  .ballShadow:nth-child(8) {
+    --left: -0.5em;
+    --delay: 2.713s;
+  }
+  
+  .ball:nth-child(9),
+  .ballShadow:nth-child(9) {
+    --left: -3em;
+    --delay: 3.009s;
+  }
+  
+  .ball:nth-child(10),
+  .ballShadow:nth-child(10) {
+    --left: -9.25em;
+    --delay: 3.976s;
+  }
+  
+  .ball:nth-child(11),
+  .ballShadow:nth-child(11) {
+    --left: -6.75em;
+    --delay: 4.256s;
+  }
+  
+  .ball:nth-child(12),
+  .ballShadow:nth-child(12) {
+    --left: -3em;
+    --delay: 4.52s;
+  }
+  
+  .ball:nth-child(13),
+  .ballShadow:nth-child(13) {
+    --left: -1.75em;
+    --delay: 4.796s;
+  }
+  
+  .ball:nth-child(14),
+  .ballShadow:nth-child(14) {
+    --left: -6.75em;
+    --delay: 5.634s;
+  }
+  
+  .ball:nth-child(15),
+  .ballShadow:nth-child(15) {
+    --left: -3.625em;
+    --delay: 5.919s;
+  }
+  
+  .ball:nth-child(16),
+  .ballShadow:nth-child(16) {
+    --left: -1.75em;
+    --delay: 6.189s;
+  }
+  
+  .ball:nth-child(17),
+  .ballShadow:nth-child(17) {
+    --left: -0.5em;
+    --delay: 6.494s;
+  }
+  
+  .ball:nth-child(18),
+  .ballShadow:nth-child(18) {
+    --left: -6.75em;
+    --delay: 7.366s;
+  }
+  
+  .ball:nth-child(19),
+  .ballShadow:nth-child(19) {
+    --left: 2em;
+    --delay: 7.677s;
+  }
+  
+  .ball:nth-child(20),
+  .ballShadow:nth-child(20) {
+    --left: 1.375em;
+    --delay: 7.949s;
+  }
+  
+  .ball:nth-child(21),
+  .ballShadow:nth-child(21) {
+    --left: 2em;
+    --delay: 8.26s;
+  }
+  
+  .ball:nth-child(22),
+  .ballShadow:nth-child(22) {
+    --left: 1.375em;
+    --delay: 8.515s;
+  }
+  
+  .ball:nth-child(23),
+  .ballShadow:nth-child(23) {
+    --left: 2em;
+    --delay: 8.792s;
+  }
+  
+  .ball:nth-child(24),
+  .ballShadow:nth-child(24) {
+    --left: -1.75em;
+    --delay: 9.074s;
+  }
+  
+  .ball:nth-child(25),
+  .ballShadow:nth-child(25) {
+    --left: 0.75em;
+    --delay: 9.367s;
+  }
+  
+  .ball:nth-child(26),
+  .ballShadow:nth-child(26) {
+    --left: -0.5em;
+    --delay: 9.649s;
+  }
+  
+  .ball:nth-child(27),
+  .ballShadow:nth-child(27) {
+    --left: -3em;
+    --delay: 9.944s;
+  }
+  
+  .ball:nth-child(28),
+  .ballShadow:nth-child(28) {
+    --left: -9.25em;
+    --delay: 10.81s;
+  }
+  
+  .ball:nth-child(29),
+  .ballShadow:nth-child(29) {
+    --left: -6.75em;
+    --delay: 11.088s;
+  }
+  
+  .ball:nth-child(30),
+  .ballShadow:nth-child(30) {
+    --left: -3em;
+    --delay: 11.37s;
+  }
+  
+  .ball:nth-child(31),
+  .ballShadow:nth-child(31) {
+    --left: -1.75em;
+    --delay: 11.677s;
+  }
+  
+  .ball:nth-child(32),
+  .ballShadow:nth-child(32) {
+    --left: -6.75em;
+    --delay: 12.595s;
+  }
+  
+  .ball:nth-child(33),
+  .ballShadow:nth-child(33) {
+    --left: -0.5em;
+    --delay: 12.883s;
+  }
+  
+  .ball:nth-child(34),
+  .ballShadow:nth-child(34) {
+    --left: -1.75em;
+    --delay: 13.169s;
+  }
+  
+  .ball:nth-child(35),
+  .ballShadow:nth-child(35) {
+    --left: -3em;
+    --delay: 13.493s;
+  }
+</style>
+
+<body>
+  <audio autoplay>
+  <source src="https://github.com/ravana69/html3/blob/02ca7afee205ecaadc4bc223c5266ddfe7f0a750/music.mp3" type="audio/mpeg">
+</audio>
+
+  <div class="text">
+    Turn on your speakers
+  </div>
+
+  <div class="scene">
+
+    <div class="xylophone">
+      <div class="key"></div>
+      <div class="key"></div>
+      <div class="key"></div>
+      <div class="key"></div>
+      <div class="key"></div>
+      <div class="key"></div>
+      <div class="key"></div>
+      <div class="key"></div>
+      <div class="key"></div>
+      <div class="key"></div>
+      <div class="key"></div>
+      <div class="key"></div>
+      <div class="key"></div>
+      <div class="key"></div>
+      <div class="key"></div>
+      <div class="key">
+        <div class="keyShadow"></div>
+      </div>
+      <div class="key">
+        <div class="keyShadow"></div>
+      </div>
+      <div class="key">
+        <div class="keyShadow"></div>
+      </div>
+      <div class="key">
+        <div class="keyShadow"></div>
+      </div>
+      <div class="key">
+        <div class="keyShadow"></div>
+      </div>
+      <div class="key">
+        <div class="keyShadow"></div>
+      </div>
+      <div class="key">
+        <div class="keyShadow"></div>
+      </div>
+      <div class="key">
+        <div class="keyShadow"></div>
+      </div>
+      <div class="key">
+        <div class="keyShadow"></div>
+      </div>
+      <div class="key">
+        <div class="keyShadow"></div>
+      </div>
+    </div>
+
+    <div class="balls">
+      <div class="ball"></div>
+      <div class="ball"></div>
+      <div class="ball"></div>
+      <div class="ball"></div>
+      <div class="ball"></div>
+      <div class="ball"></div>
+      <div class="ball"></div>
+      <div class="ball"></div>
+      <div class="ball"></div>
+      <div class="ball"></div>
+      <div class="ball"></div>
+      <div class="ball"></div>
+      <div class="ball"></div>
+      <div class="ball"></div>
+      <div class="ball"></div>
+      <div class="ball"></div>
+      <div class="ball"></div>
+      <div class="ball"></div>
+      <div class="ball"></div>
+      <div class="ball"></div>
+      <div class="ball"></div>
+      <div class="ball"></div>
+      <div class="ball"></div>
+      <div class="ball"></div>
+      <div class="ball"></div>
+      <div class="ball"></div>
+      <div class="ball"></div>
+      <div class="ball"></div>
+      <div class="ball"></div>
+      <div class="ball"></div>
+      <div class="ball"></div>
+      <div class="ball"></div>
+      <div class="ball"></div>
+      <div class="ball"></div>
+      <div class="ball"></div>
+    </div>
+    <div class="ballShadows">
+      <div class="ballShadow"></div>
+      <div class="ballShadow"></div>
+      <div class="ballShadow"></div>
+      <div class="ballShadow"></div>
+      <div class="ballShadow"></div>
+      <div class="ballShadow"></div>
+      <div class="ballShadow"></div>
+      <div class="ballShadow"></div>
+      <div class="ballShadow"></div>
+      <div class="ballShadow"></div>
+      <div class="ballShadow"></div>
+      <div class="ballShadow"></div>
+      <div class="ballShadow"></div>
+      <div class="ballShadow"></div>
+      <div class="ballShadow"></div>
+      <div class="ballShadow"></div>
+      <div class="ballShadow"></div>
+      <div class="ballShadow"></div>
+      <div class="ballShadow"></div>
+      <div class="ballShadow"></div>
+      <div class="ballShadow"></div>
+      <div class="ballShadow"></div>
+      <div class="ballShadow"></div>
+      <div class="ballShadow"></div>
+      <div class="ballShadow"></div>
+      <div class="ballShadow"></div>
+      <div class="ballShadow"></div>
+      <div class="ballShadow"></div>
+      <div class="ballShadow"></div>
+      <div class="ballShadow"></div>
+      <div class="ballShadow"></div>
+      <div class="ballShadow"></div>
+      <div class="ballShadow"></div>
+      <div class="ballShadow"></div>
+      <div class="ballShadow"></div>
+    </div>
+  </div>
+</body>
+
+</html>
